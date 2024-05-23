@@ -9,12 +9,11 @@ export function createRandomUser() {
     avatar: faker.image.avatar(),
     password: faker.internet.password(),
     birthdate: faker.date.birthdate(),
-    registeredAt: faker.date.past(),
   };
 }
 
 export const a = faker.helpers.multiple(createRandomUser, {
-  count: 50,
+  count: 5000000,
 });
 
 http.createServer(function (req, res) {
