@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc' # Update with your Kubernetes API server address
+    namespace: default # Update with the namespace where you want to deploy
+  source:
+    repoURL: 'https://github.com/superbotdevops/my-app.git' # Update with your Git repository URL
+    targetRevision: '34350e6' # Update with the desired Git commit/branch/tag
+    path: '.' # Update with the path to your application manifests within the Git repository
+  project: default # Update with the name of your Argo CD project
+  syncPolicy:
+    automated:
+      prune: true # Enable or disable automatic pruning of resources not declared in Git
+      selfHeal: true # Enable or disable self-healing of resources
