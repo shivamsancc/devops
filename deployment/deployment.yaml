@@ -1,31 +1,19 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: my-app
+  name: my-app-deployment
 spec:
-  destination:
-    server: 'https://kubernetes.default.svc' # Update with your Kubernetes API server address
-    namespace: default # Update with the namespace where you want to deploy
-  source:
-    repoURL: 'https://github.com/superbotdevops/my-app.git' # Update with your Git repository URL
-    targetRevision: 'main' # Update with the desired Git branch/tag
-    path: '.' # Update with the path to your application manifests within the Git repository
-  project: default # Update with the name of your Argo CD project
-  syncPolicy:
-    automated:
-      prune: true # Enable or disable automatic pruning of resources not declared in Git
-      selfHeal: true # Enable or disable self-healing of resources
-  # Use parameters to dynamically inject the image tag during deployment
-  parameters:
-    - name: imageTag
-      value: "latest" # Default value, will be replaced during deployment
-  # Define the template for your application manifests
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
   template:
     metadata:
-      annotations:
-        linkerd.io/inject: enabled # Optional: Add annotations for any additional configuration
+      labels:
+        app: my-app
     spec:
       containers:
         - name: my-app
-          # Use the parameter for the image tag
-          image: '{{ .Values.image.repository }}:{{ .Parameters.imageTag }}'
+          image: superbotdevops/my-app:latest  # This will be replaced by GitHub Actions
+          ports:
+            - containerPort: 8080
