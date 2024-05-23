@@ -28,5 +28,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }} -f ./Dockerfile .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}
