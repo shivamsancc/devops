@@ -36,10 +36,10 @@ jobs:
           sed -i 's|image: .*|image: '${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}'|' deployment/deployment.yaml
           cat deployment/deployment.yaml  # Debug: Print the updated file content
 
-      # - name: Commit and push deployment file changes
-      #   run: |
-      #     git config --global user.name 'github-actions'
-      #     git config --global user.email 'github-actions@github.com'
-      #     git add deployment/deployment.yaml
-      #     git commit -m "Update image tag to ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}"
-      #     git push
+      - name: Commit and push deployment file changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add deployment/deployment.yaml
+          git commit -m "Update image tag to ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}"
+          git push
