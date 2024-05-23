@@ -33,7 +33,8 @@ jobs:
 
       - name: Update deployment file with new image tag
         run: |
-          sed -i 's|image: my-app:.*|image: '${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}'|' deployment/deployment.yaml
+          sed -i 's|image: superbotdevops/my-app:.*|image: '${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}'|' deployment/deployment.yaml
+          cat deployment/deployment.yaml  # Debug: Print the updated file content
 
       - name: Commit and push deployment file changes
         run: |
