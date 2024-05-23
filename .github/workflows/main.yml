@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Update Deployment and Push to Git
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # You can change this to your desired branch
 
 jobs:
-  build-and-push:
+  update-deployment-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,15 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }} -f ./Dockerfile .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}
+
+      - name: Update deployment file with new image tag
+        run: |
+          sed -i 's|image: my-app:.*|image: '${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}'|' deployment/deployment.yaml
+
+      - name: Commit and push deployment file changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add deployment/deployment.yaml
+          git commit -m "Update image tag to ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{ env.COMMIT_ID }}"
+          git push
