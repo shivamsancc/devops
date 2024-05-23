@@ -20,19 +20,6 @@ spec:
     - name: imageTag
       value: "latest" # Default value, will be replaced during deployment
   # Define the template for your application manifests
-  destination:
-    namespace: default
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: .
-    repoURL: https://github.com/superbotdevops/my-app.git
-    targetRevision: HEAD
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-  # Define the template for your application manifests
   template:
     metadata:
       annotations:
