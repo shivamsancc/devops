@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: superbotdevops/my-app:afa9c11
+          image: superbotdevops/my-app:00e7534
           ports:
             - containerPort: 8080
