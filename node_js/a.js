@@ -11,6 +11,7 @@ export function createRandomUser() {
     birthdate: faker.date.birthdate(),
     registeredAt: faker.date.past(),
     registeredAt: faker.date.new(),
+    registeredAtDD: faker.date.new(),
   };
 }
 
