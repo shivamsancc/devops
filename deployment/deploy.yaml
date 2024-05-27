@@ -41,4 +41,4 @@ spec:
       targetPort: 8000
   type: LoadBalancer
   externalTrafficPolicy: Local
-  healthCheckNodePort: 8000  # Health check port matches the container port
+  healthCheckNodePort: 32085  # Health check port matches the container port
