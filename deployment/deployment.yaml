@@ -17,6 +17,6 @@ spec:
         - name: my-app
           image: superbotdevops/my-app:7865eba
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
       imagePullSecrets:
         - name: dockerhub-secret  # Name of the Docker Hub secret
