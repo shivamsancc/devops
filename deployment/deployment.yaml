@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: superbotdevops/my-app:4871a95
+          image: superbotdevops/my-app:870a893
           ports:
             - containerPort: 8080
       imagePullSecrets:
