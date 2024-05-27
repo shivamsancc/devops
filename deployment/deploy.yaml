@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  namespace: my-namespace
+spec:
+  replicas: 150
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: superbotdevops/my-app:33504a3
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 10
+      imagePullSecrets:
+        - name: dockerhub-secret  # Name of the Docker Hub secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  namespace: my-namespace
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 9005
+      targetPort: 8000
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  healthCheckNodePort: 8000  # Health check port matches the container port
