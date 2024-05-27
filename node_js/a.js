@@ -1,8 +1,8 @@
 import http from 'http';
 
-console.log('Im running in a cluster');
+console.log('I\'m running in a cluster');
 
-const a = {'Im running in a cluster'}; // Define an empty object
+const a = { message: 'Im running in a cluster' }; // Define an object with a property
 
 http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Type': 'application/json' });
