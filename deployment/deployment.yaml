@@ -17,6 +17,6 @@ spec:
         - name: my-app
           image: superbotdevops/sbt-app-frontend:3ff24db
           ports:
-            - containerPort: 8000
+            - containerPort: 3000
       imagePullSecrets:
         - name: dockerhub-secret  # Name of the Docker Hub secret
