@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: superbotdevops/sbt-app-frontend:1388e75
+          image: superbotdevops/sbt-app-frontend:a4352a8
           ports:
             - containerPort: 8000
       imagePullSecrets:
